@@ -6,7 +6,7 @@ html {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    cursor: url('/cursor.png') 16 16, auto !important;
+    cursor: url('assets/cursor.png') 16 16, auto !important;
 }
 
 body {
@@ -23,7 +23,7 @@ body {
 
 @font-face {
     font-family: 'Satoshi';
-    src: url('Satoshi-Regular.woff') format('woff');
+    src: url('assets/Satoshi-Regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
@@ -167,7 +167,7 @@ body {
     position: relative;
     z-index: 2;
     display: inline-block;
-    background: url("sparkle_white.gif") repeat-x left center;
+    background: url("assets/sparkle_white.gif") repeat-x left center;
     background-size: contain;
     padding: 10px;
     font-family: 'Satoshi', sans-serif;
