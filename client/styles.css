@@ -1,0 +1,283 @@
+html {
+    overflow: hidden; /* Prevent scrollbars at root */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    cursor: url('/cursor.png') 16 16, auto !important;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #ffffff;
+    background-color: #000;
+    overflow: hidden; /* Prevent all scrollbars */
+}
+
+@font-face {
+    font-family: 'Satoshi';
+    src: url('Satoshi-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.background-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    filter: brightness(0.7);
+}
+
+.enter-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+    z-index: 10;
+    pointer-events: auto;
+}
+
+.enter-overlay.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.enter-text {
+    font-family: 'Satoshi', sans-serif;
+    font-size: 31px;
+    font-weight: 760;
+    color: white;
+}
+
+.snowflakes {
+    position: fixed;
+    top: -10vh;
+    left: 0;
+    width: 100%;
+    height: 110%;
+    pointer-events: none;
+    z-index: 9999;
+    overflow: hidden;
+}
+
+.snowflake {
+    position: absolute;
+    color: #ffffff;
+    font-size: 1.2em;
+    animation: fall-smooth-zigzag 10s linear infinite;
+    opacity: 1;
+}
+
+@keyframes fall-smooth-zigzag {
+    0% {
+        transform: translate(0, -10vh) rotate(0deg);
+        opacity: 1;
+    }
+    10% {
+        transform: translate(-30px, 10vh) rotate(15deg);
+    }
+    20% {
+        transform: translate(30px, 20vh) rotate(-15deg);
+    }
+    30% {
+        transform: translate(-30px, 30vh) rotate(15deg);
+    }
+    40% {
+        transform: translate(30px, 40vh) rotate(-15deg);
+    }
+    50% {
+        transform: translate(-30px, 50vh) rotate(15deg);
+    }
+    60% {
+        transform: translate(30px, 60vh) rotate(-15deg);
+    }
+    70% {
+        transform: translate(-30px, 70vh) rotate(15deg);
+    }
+    80% {
+        transform: translate(30px, 80vh) rotate(-15deg);
+    }
+    90% {
+        transform: translate(-30px, 90vh) rotate(15deg);
+    }
+    100% {
+        transform: translate(30px, 110vh) rotate(-15deg);
+        opacity: 0;
+    }
+}
+
+.snowflake:nth-child(1) { left: 5%; animation-duration: 10s; animation-delay: 0s; }
+.snowflake:nth-child(2) { left: 15%; animation-duration: 10.5s; animation-delay: 1s; }
+.snowflake:nth-child(3) { left: 25%; animation-duration: 9.5s; animation-delay: 2s; }
+.snowflake:nth-child(4) { left: 35%; animation-duration: 10.2s; animation-delay: 3s; }
+.snowflake:nth-child(5) { left: 45%; animation-duration: 9.8s; animation-delay: 4s; }
+.snowflake:nth-child(6) { left: 55%; animation-duration: 10.3s; animation-delay: 5s; }
+.snowflake:nth-child(7) { left: 65%; animation-duration: 9.7s; animation-delay: 6s; }
+.snowflake:nth-child(8) { left: 75%; animation-duration: 10.1s; animation-delay: 7s; }
+.snowflake:nth-child(9) { left: 85%; animation-duration: 9.9s; animation-delay: 8s; }
+.snowflake:nth-child(10) { left: 95%; animation-duration: 10.4s; animation-delay: 9s; }
+
+.profile-container {
+    transform: scale(1.2);
+    max-width: 534px;
+    margin: 2rem auto;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    text-align: center;
+    will-change: transform, opacity; /* Optimize animation */
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    margin-bottom: 1rem;
+}
+
+.text-container {
+    position: relative;
+    z-index: 1;
+}
+
+.username {
+    position: relative;
+    z-index: 2;
+    display: inline-block;
+    background: url("sparkle_white.gif") repeat-x left center;
+    background-size: contain;
+    padding: 10px;
+    font-family: 'Satoshi', sans-serif;
+    font-size: 30px;
+    font-weight: 600;
+    text-shadow: 0 0 10.5px #ffffff;
+    transform: translateY(-22px);
+}
+
+.description {
+
+    max-width: 50ch; /* limit to approximately 50 characters */
+    word-wrap: break-word;
+    white-space: normal;
+    
+    margin: 1rem 0;
+    font-family: 'Satoshi', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 6px;
+    transform: translateY(-42px);
+}
+
+.location {
+    font-family: 'Satoshi', sans-serif;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0rem;
+    transform: translateY(-50px);
+}
+
+.location svg {
+    width: 0.85em;
+    height: 0.85em;
+    color: #ffffff;
+    filter: drop-shadow(1px 0 7px #ffffff);
+    margin-right: 0.1rem;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    font-size: 20px;
+    margin-right: -11px;
+    transition: transform 0.2s ease;
+}
+
+.social-link:hover {
+    transform: scale(1.1);
+}
+
+.social-link svg {
+    font-size: 1.5em;
+    color: #ffffff;
+    filter: drop-shadow(1px 0 7px #ffffff);
+}
+
+.audio-player {
+    position: fixed;
+    bottom: 12px;
+    right: 15px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.5rem;
+    border-radius: 12px;
+}
+
+.audio-player svg {
+    font-size: 1.5em;
+}
+
+#volume {
+    width: 100px;
+}
+
+.page-views {
+    position: fixed;
+    bottom: 12px;
+    left: 15px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 14px;
+}
+
+/* Slide animation for profile-container */
+.slide-in {
+    animation: slideIn 0.7s ease-in-out forwards;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(10vh) scale(1.2);  /* Start slightly above the bottom */
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0) scale(1.2);  /* End at the original position */
+        opacity: 1;
+    }
+}
