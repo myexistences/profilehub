@@ -139,6 +139,8 @@ body {
 .snowflake:nth-child(9) { left: 85%; animation-duration: 9.9s; animation-delay: 8s; }
 .snowflake:nth-child(10) { left: 95%; animation-duration: 10.4s; animation-delay: 9s; }
 
+
+
 .profile-container {
     transform: scale(1.2);
     max-width: 534px;
@@ -168,7 +170,7 @@ body {
     z-index: 2;
     display: inline-block;
     background: url("assets/sparkle_white.gif") repeat-x left center;
-    background-size: contain;
+    background-size: 27%; /* Reduce the size of the gif */
     padding: 10px;
     font-family: 'Satoshi', sans-serif;
     font-size: 30px;
@@ -177,36 +179,51 @@ body {
     transform: translateY(-22px);
 }
 
-.description {
 
-    max-width: 50ch; /* limit to approximately 50 characters */
+.description {
+    max-width: 50ch;
     word-wrap: break-word;
     white-space: normal;
-    
     margin: 1rem 0;
     font-family: 'Satoshi', sans-serif;
     font-size: 16px;
     font-weight: 600;
-    padding: 6px;
-    transform: translateY(-42px);
+    padding: 1px;
+    transform: translateY(-44px);
+    height: 48px; /* Fix height to two lines to prevent resizing */
+    overflow: hidden; /* Clip any overflow */
 }
+
+
+.descriptiontest {
+    margin: 0rem 0;
+    font-family: 'Satoshi', sans-serif;
+    font-size: 15px;
+    font-weight: 1;
+    padding: 6px;
+    transform: translateY(-102px);
+    height: 48px; /* Fix height to two lines to prevent resizing */
+    overflow: hidden; /* Clip any overflow */
+    visibility: hidden; /* Hide the element but keep space */
+}
+
 
 .location {
     font-family: 'Satoshi', sans-serif;
-    font-size: 13px;
+    font-size: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0rem;
-    transform: translateY(-50px);
+    transform: translateY(-97px);
 }
 
 .location svg {
-    width: 0.85em;
-    height: 0.85em;
+    width: 0.99em;
+    height: 0.99em;
     color: #ffffff;
-    filter: drop-shadow(1px 0 7px #ffffff);
-    margin-right: 0.1rem;
+    filter: drop-shadow(2px 0 4px #ffffff);
+    margin-right: 0.2rem;
 }
 
 .social-links {
