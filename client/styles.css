@@ -249,6 +249,7 @@ body {
     overflow: hidden;
     transition: width 0.4s ease;
     width: 54px;
+    
 }
 
 .volume-wrapper:hover {
@@ -262,6 +263,7 @@ body {
     flex-shrink: 0;
     margin-right: 12px;
     cursor: pointer; /* Make clickable */
+    filter: drop-shadow(1px 0 7px #ffffff);
 }
 
 .speaker-icon, .mute-icon, .wave-icon {
@@ -301,6 +303,7 @@ body {
     pointer-events: none;
     transition: opacity 0.3s ease;
     flex-shrink: 0;
+    
 }
 
 .volume-wrapper:hover .volume-slider-container {
@@ -315,6 +318,7 @@ body {
     border-radius: 10px;
     overflow: visible;
     position: relative;
+    filter: drop-shadow(1px 0 3px #ffffff);
 }
 
 .volume-fill {
