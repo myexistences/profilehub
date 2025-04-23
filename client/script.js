@@ -11,12 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     enterOverlay.addEventListener('click', () => {
         enterOverlay.classList.add('hidden');
-
-        // Optional: fully remove after fade-out
         setTimeout(() => {
             enterOverlay.style.display = 'none';
-        }, 500); // Match CSS transition time
-
+        }, 500);
         video.play().catch(err => console.error('Video play failed:', err));
         audio.play().catch(err => console.error('Audio play failed:', err));
     });
@@ -27,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
         audio.volume = percent;
         volumeFill.style.transform = `scaleX(${percent})`;
         volumeThumb.style.left = `${value}%`;
-
         if (value == 0) {
             muteIcon.style.display = "block";
             waveIcon.style.display = "none";
@@ -39,14 +35,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     volumeSlider.addEventListener('input', updateSlider);
 
-    // Toggle volume on icon click
     iconContainer.addEventListener('click', () => {
         const currentValue = parseInt(volumeSlider.value);
         volumeSlider.value = currentValue === 0 ? 100 : 0;
         updateSlider();
     });
 
-    updateSlider(); // Initial setup
+    updateSlider();
 
     const snowflakes = document.querySelectorAll('.snowflake');
     snowflakes.forEach(snowflake => {
@@ -54,4 +49,17 @@ document.addEventListener('DOMContentLoaded', () => {
         snowflake.style.animationDuration = `${10 + Math.random() * 5}s`;
         snowflake.style.animationDelay = `${Math.random() * 10}s`;
     });
+
+    // Add line break to description after ~50 characters
+    const description = document.querySelector('.description');
+    const text = description.textContent;
+    let breakPoint = 50;
+    while (breakPoint > 0 && text[breakPoint] !== ' ') {
+        breakPoint--;
+    }
+   if (breakPoint > 0) {
+        const part1 = text.substring(0, breakPoint);
+        const part2 = text.substring(breakPoint);
+        description.innerHTML = `${part1}<br>${part2}`;
+    }
 });
