@@ -236,24 +236,123 @@ body {
     filter: drop-shadow(1px 0 7px #ffffff);
 }
 
-.audio-player {
+.volume-wrapper {
     position: fixed;
-    bottom: 12px;
-    right: 15px;
+    top: 10px; /* Top-left corner */
+    left: 10px; /* Top-left corner */
     display: flex;
     align-items: center;
-    gap: 1rem;
-    background: rgba(255, 255, 255, 0.2);
-    padding: 0.5rem;
-    border-radius: 12px;
+    border-radius: 16px;
+    background: rgba(31, 30, 30, 0.2);
+    padding: 8px;
+    z-index: 9; /* Behind enter-overlay (z-index: 10) */
+    overflow: hidden;
+    transition: width 0.4s ease;
+    width: 54px;
 }
 
-.audio-player svg {
-    font-size: 1.5em;
+.volume-wrapper:hover {
+    width: 184px;
 }
 
-#volume {
-    width: 100px;
+.icon-container {
+    position: relative;
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    margin-right: 12px;
+    cursor: pointer; /* Make clickable */
+}
+
+.speaker-icon, .mute-icon, .wave-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 28px;
+    height: 28px;
+    pointer-events: none;
+}
+
+.speaker-icon path {
+    fill: gray;
+    stroke: white;
+    stroke-width: 1.3;
+}
+
+.mute-icon {
+    fill: none;
+    stroke: white;
+    stroke-width: 1.6;
+    display: none;
+}
+
+.wave-icon {
+    fill: none;
+    stroke: white;
+    stroke-width: 1.3;
+    display: none;
+}
+
+.volume-slider-container {
+    width: 110px;
+    height: 4px; /* thinner bar */
+    position: relative;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    flex-shrink: 0;
+}
+
+.volume-wrapper:hover .volume-slider-container {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.volume-track {
+    width: 100%;
+    height: 100%;
+    background: gray;
+    border-radius: 10px;
+    overflow: visible;
+    position: relative;
+}
+
+.volume-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: white;
+    width: 100%;
+    transform: scaleX(1);
+    transform-origin: left;
+    pointer-events: none;
+    z-index: 1;
+    transition: transform 0.2s ease; /* Smooth animation */
+}
+
+.volume-thumb {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 12px;
+    height: 12px;
+    background: white;
+    border-radius: 50%;
+    z-index: 2;
+    pointer-events: none;
+    transition: left 0.2s ease; /* Smooth animation */
+}
+
+input[type="range"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: 3;
+    cursor: pointer;
 }
 
 .page-views {
