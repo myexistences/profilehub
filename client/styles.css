@@ -170,7 +170,7 @@ body {
     z-index: 2;
     display: inline-block;
     background: url("assets/sparkle_white.gif") repeat-x left center;
-    background-size: 27%; /* Reduce the size of the gif */
+    background-size: 27%; /* Reduce the size of the gif! */
     padding: 10px;
     font-family: 'Satoshi', sans-serif;
     letter-spacing: 2px;
