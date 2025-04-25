@@ -170,9 +170,10 @@ body {
     z-index: 2;
     display: inline-block;
     background: url("assets/sparkle_white.gif") repeat-x left center;
-    background-size: 27%; /* Reduce the size of the gif */
+    background-size: 27%; /* Reduce the size of the gif! */
     padding: 10px;
     font-family: 'Satoshi', sans-serif;
+    letter-spacing: 2px;
     font-size: 30px;
     font-weight: 600;
     text-shadow: 0 0 10.5px #ffffff;
@@ -335,7 +336,7 @@ body {
     border-radius: 10px;
     overflow: visible;
     position: relative;
-    filter: drop-shadow(1px 0 3px #ffffff);
+    filter: drop-shadow(1px 0 1px #ffffff);
 }
 
 .volume-fill {
