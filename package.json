@@ -10,6 +10,6 @@
         "express": "^4.19.2"
     },
     "devDependencies": {
-        "live-server": "^2.1.2"
+        "live-server": "^1.2.2"
     }
 }
