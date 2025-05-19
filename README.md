@@ -21,9 +21,9 @@
 
 ## 🚀 Demo
 
-![Demo Screenshot](https://og.guns.lol/api/og?username=randomcheat&t=1745258570100)
+![Demo Screenshot](https://i.imgur.com/PcTori4.png)
 
-> Live at: **[randoma.lol](https://randoma.lol)**
+> Live at: **[randoma.lol](https://profilehub-la2b.vercel.app)**
 
 ---
 
