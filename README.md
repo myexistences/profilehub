@@ -2,7 +2,7 @@
 
 **ProfileHub** is a stylish, animated profile landing page made for developers, creators, and enthusiasts who want to showcase their online presence with aesthetic and interactive visuals.
 
-[Live Preview »](https://randoma.lol)  
+[Live Preview »](https://profilehub-la2b.vercel.app/)  
 [![GitHub Stars](https://img.shields.io/github/stars/myexistences/profilehub?style=flat-square)](https://github.com/myexistences/profilehub/stargazers)
 [![GitHub Forks](https://img.shields.io/github/forks/myexistences/profilehub?style=flat-square)](https://github.com/myexistences/profilehub/fork)
 
