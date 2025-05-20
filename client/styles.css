@@ -142,14 +142,16 @@ body {
 
 
 .profile-container {
-    transform: scale(1.2);
-    max-width: 534px;
+    transform: scale(1);
+    max-width: 610px;
     margin: 2rem auto;
     padding: 20px;
     background: rgba(0, 0, 0, 0.5);
     border-radius: 20px;
     text-align: center;
-    will-change: transform, opacity; /* Optimize animation */
+    will-change: transform, opacity;
+    max-height: 445px;
+    overflow: hidden;
 }
 
 .avatar {
@@ -170,7 +172,7 @@ body {
     z-index: 2;
     display: inline-block;
     background: url("assets/sparkle_white.gif") repeat-x left center;
-    background-size: 27%; /* Reduce the size of the gif! */
+    background-size: 25%; /* Slightly reduce gif size for better clarity */
     padding: 10px;
     font-family: 'Satoshi', sans-serif;
     letter-spacing: 2px;
@@ -178,22 +180,36 @@ body {
     font-weight: 600;
     text-shadow: 0 0 10.5px #ffffff;
     transform: translateY(-22px);
+    text-rendering: optimizeLegibility;  /* Improve text rendering */
+    -webkit-font-smoothing: antialiased;  /* Sharper text on webkit browsers */
+    -moz-osx-font-smoothing: grayscale;  /* Sharper text on Firefox */
+    image-rendering: -webkit-optimize-contrast;  /* Sharper background image */
+    image-rendering: crisp-edges;  /* Sharper background image */
 }
 
 
 .description {
     max-width: 50ch;
     word-wrap: break-word;
-    white-space: normal;
     margin: 1rem 0;
     font-family: 'Satoshi', sans-serif;
     font-size: 16px;
     font-weight: 600;
     padding: 1px;
-    transform: translateY(-44px);
-    height: 48px; /* Fix height to two lines to prevent resizing */
-    overflow: hidden; /* Clip any overflow */
+    height: 48px;
+    overflow: hidden;
+    letter-spacing: 0.3px;  /* Add space between letters */
+    text-shadow: 0 0 0.5px rgba(255, 255, 255, 0.5);  /* Subtle text shadow for clarity */
+
+    /* Blur fixes */
+    transform: translate3d(0, -44px, 0);
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;  /* Improve text rendering */
 }
+
 
 
 .descriptiontest {
@@ -209,34 +225,65 @@ body {
 }
 
 
+/* Location section styling */
 .location {
     font-family: 'Satoshi', sans-serif;
-    font-size: 12px;
+    font-size: 12.5px;  /* Text size for location */
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0rem;
-    transform: translateY(-97px);
+    transform: translateY(-97px);  /* Move up to fit in profile container */
+    color: #ffffff;
+    line-height: 1;
 }
 
+/* Location icon styling */
 .location svg {
-    width: 0.99em;
-    height: 0.99em;
+    width: 12.5px;  /* Icon size matching text */
+    height: 12.5px;
     color: #ffffff;
-    filter: drop-shadow(2px 0 4px #ffffff);
-    margin-right: 0.2rem;
+    filter: drop-shadow(2px 0 4px #ffffff);  /* White glow effect */
+    margin-right: 0.2rem;  /* Space between icon and text */
+    position: relative;
+    top: 0.5px;  /* Fine-tune vertical alignment */
+}
+
+/* Location text styling */
+.location span {
+    position: relative;
+    top: 1px;  /* Move text down slightly to align with icon */
+}
+
+.discord-Profile-Container {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 17px;
+    padding: 35px;
+    text-align: center;
+    margin: 20px auto;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(27, 27, 27, 0.5);
+    min-width: 100px;
+    width: 61%;
+    position: relative;
+    top: -90px;
 }
 
 .social-links {
     display: flex;
     justify-content: center;
+    align-items: center;
     margin-top: 1rem;
+    margin-left: -10px;
+    transform: translateY(-90px);
 }
 
 .social-link {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    
     width: 48px;
     height: 48px;
     font-size: 20px;
@@ -383,8 +430,22 @@ input[type="range"] {
     left: 15px;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    font-size: 14px;
+    gap: 0.2rem;
+    font-size: 12px;
+    font-family: 'Satoshi', sans-serif;
+    color: #ffffff;
+    line-height: 1;
+}
+
+.page-views span {
+    position: relative;
+    top: 0px;
+}
+
+.page-views svg {
+    width: 15px;
+    height: 15px;
+    filter: drop-shadow(1px 0 7px #ffffff);
 }
 
 /* Slide animation for profile-container */
