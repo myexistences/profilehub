@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@Random Cheat | Randoma.lol</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="apple-touch-icon" sizes="180x180" href="https://assets.guns.lol/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="https://assets.guns.lol/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="https://assets.guns.lol/favicon/favicon-16x16.png">
-    <meta name="description" content="Profile of Random Cheat">
-    <meta property="og:title" content="@Random Cheat | profilehub.com">
-    <meta property="og:description" content="Profile of Random Cheat">
-    <meta property="og:image" content="https://og.guns.lol/api/og?username=randomcheat&t=1745258570100">
-    <meta name="twitter:card" content="summary_large_image">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>@Random Cheat | Randoma.lol</title>
+        <link rel="stylesheet" href="styles.css">
+        <link rel="apple-touch-icon" sizes="180x180" href="https://assets.guns.lol/favicon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="https://assets.guns.lol/favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="https://assets.guns.lol/favicon/favicon-16x16.png">
+        <meta name="description" content="Profile of Random Cheat">
+        <meta property="og:title" content="@Random Cheat | profilehub.com">
+        <meta property="og:description" content="Profile of Random Cheat">
+        <meta property="og:image" content="https://og.guns.lol/api/og?username=randomcheat&t=1745258570100">
+        <meta name="twitter:card" content="summary_large_image">
+        <script src="/socket.io/socket.io.js"></script>
+    </head>
 <body>
     <!-- Background Video -->
     <video id="background-video" class="background-video" muted loop>
@@ -57,8 +58,17 @@
             Mars!
         </span>
        
-       <div class="discord-Profile-Container">  
-        
+       <div class="discord-Profile-Container">
+         <div class="card" style="position:relative;">
+           <img id="avatar" class="avatar" src="" alt="">
+           <img id="statusIcon" style="width:15px;height:15px;position:absolute;left:70px;top:65px;border-radius:50%;box-shadow:0 1px 4px #0008;z-index:2;pointer-events:none;" src="" alt="status">
+           <div class="content">
+             <div id="name" class="name">Loading…</div>
+             <div id="activityLine1" class="activity"></div>
+             <div id="activityLine2" class="activity"></div>
+           </div>
+           <img id="asset" class="asset" src="" alt="" style="width:40px;height:40px;">
+         </div>
        </div>
        
         <div class="social-links">
@@ -75,7 +85,7 @@
          <!-- Page Views -->
     <div class="page-views">
         <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M12 9a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5a5 5 0 0 1 5-5a5 5 0 0 1 5 5a5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5"></path></svg>
-        <span>478</span>
+        <span>1M</span>
     </div>
     </div>
 
@@ -134,5 +144,163 @@
 
     <script src="script.js"></script>
    <!-- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'934e087a1e26dd1e',t:'MTc0NTQxODM1Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script> -->
+
+    <script>
+        const socket      = io();
+        const avatarEl    = document.getElementById('avatar');
+        const nameEl      = document.getElementById('name');
+        const activityLine1 = document.getElementById('activityLine1');
+        const activityLine2 = document.getElementById('activityLine2');
+        const assetEl     = document.getElementById('asset');
+        const card        = document.querySelector('.card');
+        const statusIconEl = document.getElementById('statusIcon');
+
+        const shadows = {
+          online : '#3ba55d',
+          idle   : '#faa61a',
+          dnd    : '#ed4245',
+          offline: '#747f8d'
+        };
+
+        const statusIcons = {
+          online: "https://assets.guns.lol/online.png",
+          idle: "https://assets.guns.lol/idle.png",
+          dnd: "https://assets.guns.lol/dnd.png",
+          offline: "https://assets.guns.lol/offline.png"
+        };
+
+        // Enhanced activity type detection function
+        function getActivityType(activity) {
+          if (!activity || !activity.name) return 'Playing';
+          
+          const activityName = activity.name.toLowerCase();
+          
+          // Check for listening activities (Spotify, Apple Music, etc.)
+          if (activityName.includes('spotify') || 
+              activity.type === 2 || 
+              activityName.includes('apple music') || 
+              activityName.includes('soundcloud') ||
+              activityName.includes('youtube music')) {
+            return 'Listening';
+          }
+          
+          // Check for watching activities (Crunchyroll, Netflix, etc.)
+          if (activityName.includes('crunchyroll') ||
+              activityName.includes('netflix') ||
+              activityName.includes('hulu') ||
+              activityName.includes('disney') ||
+              activityName.includes('amazon prime') ||
+              activityName.includes('youtube') ||
+              activityName.includes('twitch') ||
+              activityName.includes('anime') ||
+              activityName.includes('movie') ||
+              activityName.includes('tv show') ||
+              activityName.includes('series') ||
+              activity.type === 3) { // Discord activity type 3 is "Watching"
+            return 'Watching';
+          }
+          
+          // Default to Playing for games and other activities
+          return 'Playing';
+        }
+
+        function timeAgo(timestamp) {
+          if (!timestamp) return '';
+          const now = Date.now();
+          const diff = Math.floor((now - timestamp) / 1000);
+          if (diff < 60) return `${diff} second${diff !== 1 ? 's' : ''} ago`;
+          const min = Math.floor(diff / 60);
+          if (min < 60) return `${min} minute${min !== 1 ? 's' : ''} ago`;
+          const hr = Math.floor(min / 60);
+          if (hr < 24) return `${hr} hour${hr !== 1 ? 's' : ''} ago`;
+          const day = Math.floor(hr / 24);
+          return `${day} day${day !== 1 ? 's' : ''} ago`;
+        }
+
+        function render(data) {
+          console.log('[RENDER] Called with data:', data);
+          if (!avatarEl) console.error('[RENDER] avatarEl not found');
+          if (!nameEl) console.error('[RENDER] nameEl not found');
+          if (!card) console.error('[RENDER] card not found');
+          if (!statusIconEl) console.error('[RENDER] statusIconEl not found');
+          if (!activityLine1) console.error('[RENDER] activityLine1 not found');
+          if (!activityLine2) console.error('[RENDER] activityLine2 not found');
+          if (!assetEl) console.error('[RENDER] assetEl not found');
+
+          if (avatarEl) {
+            avatarEl.src = data.avatar;
+            console.log('[RENDER] Set avatar src:', data.avatar);
+            console.log('[RENDER] avatarEl after set:', avatarEl);
+            avatarEl.onerror = function() {
+              console.error('[RENDER] Avatar image failed to load:', data.avatar);
+            };
+            avatarEl.onload = function() {
+              console.log('[RENDER] Avatar image loaded successfully:', data.avatar);
+            };
+          }
+          if (nameEl) {
+            nameEl.textContent = data.username;
+            console.log('[RENDER] Set name:', data.username);
+          }
+          // REMOVED: Shadow effect that was showing color layer
+          // if (card) {
+          //   card.style.boxShadow = `0 0 12px 0 ${shadows[data.status] || '#0000'}`;
+          //   console.log('[RENDER] Set card boxShadow:', shadows[data.status] || '#0000');
+          // }
+          if (statusIconEl) {
+            statusIconEl.src = statusIcons[data.status] || statusIcons['offline'];
+            console.log('[RENDER] Set statusIcon src:', statusIcons[data.status] || statusIcons['offline']);
+          }
+
+          // Clear lines by default
+          if (activityLine1) activityLine1.textContent = '';
+          if (activityLine2) activityLine2.innerHTML = '';
+
+          if (data.status === 'offline') {
+            if (activityLine1) activityLine1.textContent = '';
+            if (activityLine2) activityLine2.innerHTML = `<i>last seen ${timeAgo(data.timestamp)}</i>`;
+            if (assetEl) assetEl.style.display = 'none';
+            return;
+          }
+
+          if (data.activity) {
+            // Use the enhanced activity type detection
+            const typeLabel = getActivityType(data.activity);
+            
+            if (activityLine1) {
+              activityLine1.innerHTML = `<b>${typeLabel}</b> ${data.activity.name || ''}`;
+              console.log('[RENDER] Set activityLine1:', typeLabel, data.activity.name);
+            }
+            if (activityLine2 && (data.activity.details || data.activity.state)) {
+              activityLine2.textContent = data.activity.details || data.activity.state;
+              console.log('[RENDER] Set activityLine2:', data.activity.details || data.activity.state);
+            }
+            if (assetEl) {
+              if (data.activity.largeImage) {
+                assetEl.src = data.activity.largeImage;
+                assetEl.style.display = 'block';
+                console.log('[RENDER] Set asset src:', data.activity.largeImage);
+              } else {
+                assetEl.style.display = 'none';
+                console.log('[RENDER] Hide asset');
+              }
+            }
+          } else {
+            if (activityLine1) activityLine1.textContent = '';
+            if (activityLine2) activityLine2.textContent = '';
+            if (assetEl) assetEl.style.display  = 'none';
+            console.log('[RENDER] No activity, hide asset');
+          }
+        }
+
+        socket.on('status', data => {
+          console.log('[SOCKET STATUS]', data);
+          render(data);
+        });
+        fetch('/api/status').then(r => r.json()).then(d => {
+          console.log('[API STATUS]', d);
+          if (d) render(d);
+        });
+    </script>
 </body>
 </html>
