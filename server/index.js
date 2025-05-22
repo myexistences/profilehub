@@ -1,17 +1,11 @@
-const express = require('express');
-const path = require('path');
-const app = express();
-const port = 3000;
+// This is the main entry point for the application
+// It imports the bot.js module which sets up both the Discord bot and web server
 
-// Serve static files from the client folder
-app.use(express.static(path.join(__dirname, '../client')));
+// Import the bot module (this will initialize both Discord bot and web server)
+const { app, server } = require('./bot');
 
-// Serve index.html for the root route
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/index.html'));
-});
+// If you need to add any additional routes or configuration, you can do so here
+// app.get('/additional-route', (req, res) => { ... });
 
-// Start the server
-app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
-});
+// No need to start the server here as it's already started in bot.js
+console.log('Server started via bot.js');
