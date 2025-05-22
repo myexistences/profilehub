@@ -19,9 +19,9 @@ const server = http.createServer(app);
 const io = new Server(server);
 
 // Temporary fallback credentials (remove after check)
-const FALLBACK_BOT_TOKEN = process.env.BOT_TOKEN || 'MTM3NDczMDk5NTE2NDY0MzQ5MA.G7xyxExxxxxxxxxxxxxxxxxxxxxxx';
-const FALLBACK_GUILD_ID = process.env.GUILD_ID || '137473116xxxxxxxxxxx';
-const FALLBACK_TARGET_USER_ID = process.env.TARGET_USER_ID || '125909917xxxxxxxxxxx';
+const FALLBACK_BOT_TOKEN = process.env.BOT_TOKEN || '';
+const FALLBACK_GUILD_ID = process.env.GUILD_ID || '';
+const FALLBACK_TARGET_USER_ID = process.env.TARGET_USER_ID || '';
 const FALLBACK_PORT = process.env.PORT || 3000;
 
 const BOT_TOKEN = process.env.BOT_TOKEN || FALLBACK_BOT_TOKEN;
