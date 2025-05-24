@@ -255,33 +255,42 @@ body {
     top: 1px;  /* Move text down slightly to align with icon */
 }
 
-
 /* Discord profile styling with LOCKED HEIGHT container */
 .discord-Profile-Container {
     background: rgba(0, 0, 0, 0.1);
     border-radius: 17px;
-    padding: 0 35px; /* Remove vertical padding - using fixed height instead */
-    text-align: center;
+    padding: 0 20px; /* Reduced padding to minimize extra space */
+    text-align: left;
     margin: 20px auto;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(27, 27, 27, 0.5);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(15, 15, 15, 0.3);
     min-width: 100px;
-    width: 65%;
+    width: fit-content; /* Fit to content size */
+    max-width: 350px; /* Prevent excessive stretching */
     position: relative;
     top: -90px;
-    
-    /* 🔒 FIXED HEIGHT - Change this value to lock container height */
-    height: 75px; /* LOCKED HEIGHT - increase/decrease this to change container size */
+    height: 75px;
     display: flex;
-    align-items: center; /* Center content vertically within fixed height */
-    justify-content: center;
-    
-    /* Height options:
-       Small: 70px-85px
-       Medium: 86px-110px
-       Large: 111px-140px
-    */
+    align-items: center;
+    justify-content: flex-start;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Hide overflow to prevent stretching */
+}
+
+/* Handle both offline and no-activity states */
+.discord-Profile-Container.no-activity,
+.discord-Profile-Container.offline {
+    width: fit-content; /* Fit to content width */
+    min-width: 150px; /* Minimum width to prevent too narrow containers */
+    max-width: none; /* Remove max-width restriction */
+}
+
+/* Hide the asset image when offline or no activity */
+.discord-Profile-Container.no-activity .asset,
+.discord-Profile-Container.offline .asset {
+    display: none; /* Explicitly hide the asset */
 }
 
 .card {
@@ -290,68 +299,68 @@ body {
     align-items: center;
     gap: 8px;
     max-width: 100%;
-    justify-content: center;
-    width: 100%;
+    justify-content: flex-start; /* Align to the left */
+    width: fit-content; /* Allow card to fit content */
+    min-width: 100%; /* Ensure it takes full container width when needed */
+    padding-right: 30px; /* Space for asset when present */
 }
 
 .card .avatar {
-    border: none;           /* remove any border */
-    outline: none; 
-    width: 56px; /* Now you can make this ANY size without affecting container height! */
-    height: 56px; /* Fixed the typo - was 65px, now matches width for perfect circle */
+    border: none;
+    outline: none;
+    width: 56px;
+    height: 56px;
     border-radius: 50%;
     position: relative;
     flex-shrink: 0;
-    /* Avatar can now be ANY size - container height stays locked! 
-       Small: 28px-40px
-       Medium: 41px-60px  
-       Large: 61px-80px
-       Extra Large: 81px-100px (if container height allows)
-    */
-    top: 8px;    /* move down by 10px */
-    left: -27px;   /* move right by 15px */
+    top: 8px;
+    left: -6px;
+    image-rendering: -webkit-optimize-contrast; /* Sharper image rendering */
+    image-rendering: crisp-edges;
+    -webkit-font-smoothing: antialiased;
 }
 
 #statusIcon {
-    width: 14.1px !important; /* Adjusted for 64px avatar */
+    width: 14.1px !important;
     height: 14.1px !important;
     position: absolute !important;
-    left: 13px !important; /* Updated position for 64px avatar: (64-15+offset) */
-    top: 48px !important; /* Updated position for 64px avatar: (64-15+offset) */
+    left: 33px !important;
+    top: 48px !important;
     border-radius: 50% !important;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) !important;
     z-index: 2 !important;
     pointer-events: none !important;
-    /* Status positioning formula for any avatar size:
-       left: (avatar_width - status_width - 3px)
-       top: (avatar_height - status_height - 3px)
-       For 64px avatar with 15px status: left: 46px, top: 46px
-    */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
 }
 
 .content {
-    transform: translateX(-34px);
+    margin-left: -8px; /* Simplified positioning */
+    margin-top: 2px;
     flex: 1;
-    min-width: 0;
-    overflow: hidden;
+    max-width: none; /* Remove max-width restriction */
+    width: fit-content; /* Allow content to fit text */
     text-align: left;
-    margin-left: 8px;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0; /* Allow shrinking if needed */
 }
 
 .name {
-    font-family: 'Whitney', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: 13px; /* Increased for larger avatar */
+    font-family: 'Satoshi', sans-serif;
+    font-size: 15px;
     font-weight: 600;
     color: #ffffff;
-    margin-bottom: 2px;
-    white-space: nowrap;
+    margin-bottom: 4px;
+    white-space: nowrap; /* Prevent wrapping */
     overflow: hidden;
-    text-overflow: ellipsis;
-    /* Font size guide:
-       Small: 10px-12px
-       Medium: 13px-16px
-       Large: 17px-20px
-    */
+    text-overflow: ellipsis; /* Add ellipsis for truncation */
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    width: fit-content; /* Allow name to take natural width */
 }
 
 .activity {
@@ -359,49 +368,68 @@ body {
     font-size: 12px;
     color: #b9bbbe;
     font-weight: 400;
-    white-space: nowrap;
+    white-space: nowrap; /* Prevent wrapping */
     overflow: hidden;
-    text-overflow: ellipsis;
-    margin-bottom: 0px;
+    text-overflow: ellipsis; /* Add ellipsis for truncation */
+    margin-bottom: 2px;
     line-height: 1;
+    display: block !important;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    max-width: none; /* Remove any max-width restriction */
+    width: fit-content; /* Allow activity to take full width needed */
 }
 
-.activity b {
+/* Style for "currently doing nothing" message */
+.activity.nothing {
     font-family: 'Satoshi', sans-serif;
-    color: #ffffff;
+    color: #72767d;
     font-weight: 600;
-    margin-right: 2px;
+    font-size: 11.3px;
+    margin-top: 0;
+    white-space: nowrap; /* Prevent wrapping */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Add ellipsis for truncation */
+    display: block !important;
+    visibility: visible !important;
+    width: fit-content; /* Allow nothing text to take natural width */
 }
 
 /* Style for activity details */
 .activity span {
     font-family: 'Satoshi', sans-serif;
-    font-size: 9px;
+    font-size: 11px; /* Increased from 9px */
     opacity: 0.8;
     display: inline-block;
     vertical-align: top;
+    white-space: nowrap; /* Prevent wrapping */
+    max-width: 100%; /* Allow full width */
 }
-
-/* Activity text size guide:
-   Small: 9px-10px
-   Medium: 11px-13px
-   Large: 14px-16px
-*/
 
 .asset {
     width: 57px !important;
     height: 57px !important;
     border-radius: 10px;
     flex-shrink: 0;
-    margin-left: -40px; /* Push to right */
-    margin-right: -25px; /* Move further right with negative margin */
-    /* Asset size guide:
-       Small: 14px-18px
-       Medium: 19px-24px
-       Large: 25px-32px
-    */
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: block; /* Ensure asset is visible by default */
 }
 
+/* Adjust padding when asset is present */
+.discord-Profile-Container:not(.no-activity):not(.offline) .card {
+    padding-right: 70px; /* Increased from 60px to accommodate larger text */
+}
+
+/* Adjust container width when asset is present */
+.discord-Profile-Container:not(.no-activity):not(.offline) {
+    min-width: 200px; /* Minimum width when asset is present */
+    width: fit-content;
+    max-width: 400px; /* Increased from 350px to accommodate larger text */
+}
 
 .social-links {
     display: flex;
@@ -595,4 +623,8 @@ input[type="range"] {
         transform: translateY(0) scale(1.2);  /* End at the original position */
         opacity: 1;
     }
+}
+
+.discord-Profile-Container.offline {
+    width: 50%; /* Keep original width */
 }

@@ -7,5 +7,6 @@ const { app, server } = require('./bot');
 // If you need to add any additional routes or configuration, you can do so here
 // app.get('/additional-route', (req, res) => { ... });
 
+
 // No need to start the server here as it's already started in bot.js
 console.log('Server started via bot.js');
