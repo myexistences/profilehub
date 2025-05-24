@@ -216,117 +216,117 @@
         }
 
         function render(data) {
-          console.log('[RENDER] Called with data:', data);
-          
-          // Check if user ID has changed
-          if (lastUserId !== data.userId) {
-            console.log('[RENDER] User ID changed, clearing cache');
-            lastStatus = null;
-            lastUserId = data.userId;
-          }
+  console.log('[RENDER] Called with data:', data);
+  
+  // Check if user ID has changed
+  if (lastUserId !== data.userId) {
+    console.log('[RENDER] User ID changed, clearing cache');
+    lastStatus = null;
+    lastUserId = data.userId;
+  }
 
-          // Force status update if it's different
-          if (lastStatus !== data.status) {
-            console.log('[RENDER] Status changed from', lastStatus, 'to', data.status);
-            lastStatus = data.status;
-          }
+  // Force status update if it's different
+  if (lastStatus !== data.status) {
+    console.log('[RENDER] Status changed from', lastStatus, 'to', data.status);
+    lastStatus = data.status;
+  }
 
-          if (!avatarEl) console.error('[RENDER] avatarEl not found');
-          if (!nameEl) console.error('[RENDER] nameEl not found');
-          if (!card) console.error('[RENDER] card not found');
-          if (!statusIconEl) console.error('[RENDER] statusIconEl not found');
-          if (!activityLine1) console.error('[RENDER] activityLine1 not found');
-          if (!activityLine2) console.error('[RENDER] activityLine2 not found');
-          if (!assetEl) console.error('[RENDER] assetEl not found');
+  if (!avatarEl) console.error('[RENDER] avatarEl not found');
+  if (!nameEl) console.error('[RENDER] nameEl not found');
+  if (!card) console.error('[RENDER] card not found');
+  if (!statusIconEl) console.error('[RENDER] statusIconEl not found');
+  if (!activityLine1) console.error('[RENDER] activityLine1 not found');
+  if (!activityLine2) console.error('[RENDER] activityLine2 not found');
+  if (!assetEl) console.error('[RENDER] assetEl not found');
 
-          // Get the Discord profile container
-          const discordContainer = document.querySelector('.discord-Profile-Container');
-          
-          // Handle offline status first
-          if (data.status === 'offline' || !data.status || data.status === 'invisible') {
-            console.log('[RENDER] User is offline, status:', data.status);
-            if (discordContainer) {
-              discordContainer.classList.add('offline');
-              discordContainer.classList.remove('no-activity');
-            }
-            if (activityLine1) {
-              activityLine1.textContent = '';
-              activityLine1.classList.remove('nothing');
-            }
-            if (activityLine2) {
-              activityLine2.innerHTML = data.timestamp ? `<i>last seen ${timeAgo(data.timestamp)}</i>` : '';
-            }
-            if (assetEl) assetEl.style.display = 'none';
-            if (statusIconEl) {
-              statusIconEl.src = statusIcons['offline'];
-              console.log('[RENDER] Set status to offline');
-            }
-          } else {
-            console.log('[RENDER] User is online, status:', data.status);
-            if (discordContainer) {
-              discordContainer.classList.remove('offline');
-            }
-            if (statusIconEl) {
-              // Prioritize streaming icon if activity type is streaming
-              if (data.activity && data.activity.type === 1) {
-                statusIconEl.src = statusIcons['streaming'];
-                console.log('[RENDER] Set status to streaming icon');
-              } else {
-                // Otherwise, use the general status icon
-                statusIconEl.src = statusIcons[data.status] || statusIcons['offline'];
-                console.log('[RENDER] Set status to:', data.status);
-              }
-            }
-          }
+  // Get the Discord profile container
+  const discordContainer = document.querySelector('.discord-Profile-Container');
+  
+  // Handle offline status first
+  if (data.status === 'offline' || !data.status || data.status === 'invisible') {
+    console.log('[RENDER] User is offline, status:', data.status);
+    if (discordContainer) {
+      discordContainer.classList.add('offline');
+      discordContainer.classList.remove('no-activity');
+    }
+    if (activityLine1) {
+      activityLine1.textContent = '';
+      activityLine1.classList.remove('nothing');
+    }
+    if (activityLine2) {
+      activityLine2.innerHTML = data.timestamp ? `<i>last seen ${timeAgo(data.timestamp)}</i>` : '';
+    }
+    if (assetEl) assetEl.style.display = 'none';
+    if (statusIconEl) {
+      statusIconEl.src = statusIcons['offline'];
+      console.log('[RENDER] Set status to offline');
+    }
+  } else {
+    console.log('[RENDER] User is online, status:', data.status);
+    if (discordContainer) {
+      discordContainer.classList.remove('offline');
+    }
+    if (statusIconEl) {
+      if (data.activity && data.activity.type === 1) {
+        statusIconEl.src = statusIcons['streaming'];
+        console.log('[RENDER] Set status to streaming icon');
+      } else {
+        statusIconEl.src = statusIcons[data.status] || statusIcons['offline'];
+        console.log('[RENDER] Set status to:', data.status);
+      }
+    }
+  }
 
-          // Update avatar and name
-          if (avatarEl) {
-            avatarEl.src = data.avatar;
-            console.log('[RENDER] Set avatar src:', data.avatar);
-          }
-          if (nameEl) {
-            nameEl.textContent = data.username;
-            console.log('[RENDER] Set name:', data.username);
-          }
+  // Update avatar and name
+  if (avatarEl) {
+    avatarEl.src = data.avatar;
+    console.log('[RENDER] Set avatar src:', data.avatar);
+  }
+  if (nameEl) {
+    nameEl.textContent = data.username;
+    console.log('[RENDER] Set name:', data.username);
+  }
 
-          // Handle activity display
-          if (data.status !== 'offline' && data.status !== 'invisible' && data.activity) {
-            console.log('[RENDER] User has activity');
-            const typeLabel = getActivityType(data.activity);
-            
-            if (activityLine1) {
-              activityLine1.innerHTML = `<b>${typeLabel}</b> ${data.activity.name || ''}`;
-              activityLine1.classList.remove('nothing');
-            }
-            if (activityLine2 && (data.activity.details || data.activity.state)) {
-              activityLine2.textContent = data.activity.details || data.activity.state;
-            }
-            if (assetEl) {
-              if (data.activity.largeImage) {
-                assetEl.src = data.activity.largeImage;
-                assetEl.style.display = 'block';
-              } else {
-                assetEl.style.display = 'none';
-              }
-            }
-            if (discordContainer) {
-              discordContainer.classList.remove('no-activity');
-            }
-          } else if (data.status !== 'offline' && data.status !== 'invisible') {
-            console.log('[RENDER] User is online but has no activity');
-            if (activityLine1) {
-              activityLine1.textContent = 'currently doing nothing';
-              activityLine1.classList.add('nothing');
-            }
-            if (activityLine2) {
-              activityLine2.textContent = '';
-            }
-            if (assetEl) assetEl.style.display = 'none';
-            if (discordContainer) {
-              discordContainer.classList.add('no-activity');
-            }
-          }
-        }
+  // Handle activity display
+  if (data.status !== 'offline' && data.status !== 'invisible' && data.activity) {
+    console.log('[RENDER] User has activity');
+    const typeLabel = getActivityType(data.activity);
+    
+    if (activityLine1) {
+      activityLine1.innerHTML = `<span>${typeLabel}</span><span>${data.activity.name || ''}</span>`;
+      activityLine1.classList.remove('nothing');
+    }
+    if (activityLine2 && (data.activity.details || data.activity.state)) {
+      activityLine2.innerHTML = `<span>${data.activity.details || data.activity.state}</span>`;
+    } else if (activityLine2) {
+      activityLine2.textContent = '';
+    }
+    if (assetEl) {
+      if (data.activity.largeImage) {
+        assetEl.src = data.activity.largeImage;
+        assetEl.style.display = 'block';
+      } else {
+        assetEl.style.display = 'none';
+      }
+    }
+    if (discordContainer) {
+      discordContainer.classList.remove('no-activity');
+    }
+  } else if (data.status !== 'offline' && data.status !== 'invisible') {
+    console.log('[RENDER] User is online but has no activity');
+    if (activityLine1) {
+      activityLine1.textContent = 'currently doing nothing';
+      activityLine1.classList.add('nothing');
+    }
+    if (activityLine2) {
+      activityLine2.textContent = '';
+    }
+    if (assetEl) assetEl.style.display = 'none';
+    if (discordContainer) {
+      discordContainer.classList.add('no-activity');
+    }
+  }
+}
 
         socket.on('status', data => {
           console.log('[SOCKET STATUS]', data);
