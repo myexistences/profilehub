@@ -21,13 +21,23 @@ body {
     overflow: hidden; /* Prevent all scrollbars */
 }
 
+/*
 @font-face {
     font-family: 'Satoshi';
     src: url('assets/Satoshi-Regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
-}
+}*/
+@font-face {
+    font-family: 'Satoshi';
+    src: url('https://bcreativemedia.net/wp-content/uploads/2025/01/Satoshi-Regular.woff2') format('woff2'),
+         url('https://bcreativemedia.net/wp-content/uploads/2025/01/Satoshi-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
 
+  
 .background-video {
     position: fixed;
     top: 0;
@@ -155,10 +165,15 @@ body {
 }
 
 .avatar {
+    border: none;
+    outline: none;
+    
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    border: 2px solid rgba(255, 255, 255, 0.4);
+    image-rendering: pixelated; /* Prioritize pixelated for GIFs */
+    object-fit: cover; /* Ensure image fills container without distortion */
+    /*border: 2px solid rgba(255, 255, 255, 0.4); */
     margin-bottom: 1rem;
 }
 
@@ -187,27 +202,25 @@ body {
     image-rendering: crisp-edges;  /* Sharper background image */
 }
 
-
 .description {
     max-width: 50ch;
     word-wrap: break-word;
     margin: 1rem 0;
     font-family: 'Satoshi', sans-serif;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 560;
     padding: 1px;
     height: 48px;
     overflow: hidden;
-    letter-spacing: 0.3px;  /* Add space between letters */
-    text-shadow: 0 0 0.5px rgba(255, 255, 255, 0.5);  /* Subtle text shadow for clarity */
-
-    /* Blur fixes */
+    letter-spacing: 0.3px;
+    color: #ffffff; /* Changed from rgba to pure white */
+    text-shadow: 0 0 3px rgba(255, 255, 255, 0.9); /* Increased glow effect */
     transform: translate3d(0, -44px, 0);
     will-change: transform;
     backface-visibility: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;  /* Improve text rendering */
+    text-rendering: optimizeLegibility;
 }
 
 
@@ -255,19 +268,18 @@ body {
     top: 1px;  /* Move text down slightly to align with icon */
 }
 
-/* Discord profile styling with LOCKED HEIGHT container */
 .discord-Profile-Container {
     background: rgba(0, 0, 0, 0.1);
     border-radius: 17px;
-    padding: 0 20px; /* Reduced padding to minimize extra space */
+    padding: 0 20px;
     text-align: left;
     margin: 20px auto;
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     border: 1px solid rgba(15, 15, 15, 0.3);
     min-width: 100px;
-    width: fit-content; /* Fit to content size */
-    max-width: 350px; /* Prevent excessive stretching */
+    width: fit-content;
+    max-width: 350px;
     position: relative;
     top: -90px;
     height: 75px;
@@ -276,36 +288,34 @@ body {
     justify-content: flex-start;
     transition: all 0.3s ease;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    overflow: hidden; /* Hide overflow to prevent stretching */
-}
-
-/* Handle both offline and no-activity states */
-.discord-Profile-Container.no-activity,
-.discord-Profile-Container.offline {
-    width: fit-content; /* Fit to content width */
-    min-width: 150px; /* Minimum width to prevent too narrow containers */
-    max-width: none; /* Remove max-width restriction */
-}
-
-/* Hide the asset image when offline or no activity */
-.discord-Profile-Container.no-activity .asset,
-.discord-Profile-Container.offline .asset {
-    display: none; /* Explicitly hide the asset */
-}
-
-.card {
+    overflow: hidden;
+  }
+  
+  .discord-Profile-Container.no-activity,
+  .discord-Profile-Container.offline {
+    width: fit-content;
+    min-width: 150px;
+    max-width: none;
+  }
+  
+  .discord-Profile-Container.no-activity .asset,
+  .discord-Profile-Container.offline .asset {
+    display: none;
+  }
+  
+  .card {
     display: flex;
     position: relative;
     align-items: center;
     gap: 8px;
     max-width: 100%;
-    justify-content: flex-start; /* Align to the left */
-    width: fit-content; /* Allow card to fit content */
-    min-width: 100%; /* Ensure it takes full container width when needed */
-    padding-right: 30px; /* Space for asset when present */
-}
-
-.card .avatar {
+    justify-content: flex-start;
+    width: fit-content;
+    min-width: 100%;
+    padding-right: 30px;
+  }
+  
+  .card .avatar {
     border: none;
     outline: none;
     width: 56px;
@@ -315,12 +325,12 @@ body {
     flex-shrink: 0;
     top: 8px;
     left: -6px;
-    image-rendering: -webkit-optimize-contrast; /* Sharper image rendering */
-    image-rendering: crisp-edges;
+    image-rendering: pixelated; /* Good for GIFs, preserves animation */
+    object-fit: cover; /* Ensures proper scaling */
     -webkit-font-smoothing: antialiased;
-}
-
-#statusIcon {
+  }
+  
+  #statusIcon {
     width: 14.1px !important;
     height: 14.1px !important;
     position: absolute !important;
@@ -332,82 +342,117 @@ body {
     pointer-events: none !important;
     image-rendering: -webkit-optimize-contrast;
     image-rendering: crisp-edges;
-}
-
-.content {
-    margin-left: -8px; /* Simplified positioning */
+  }
+  
+  .content {
+    margin-left: -8px;
     margin-top: 2px;
     flex: 1;
-    max-width: none; /* Remove max-width restriction */
-    width: fit-content; /* Allow content to fit text */
+    max-width: none;
+    width: fit-content;
     text-align: left;
     position: relative;
     z-index: 1;
     display: flex;
     flex-direction: column;
-    min-width: 0; /* Allow shrinking if needed */
-}
-
-.name {
+    min-width: 0;
+  }
+  
+  .name {
     font-family: 'Satoshi', sans-serif;
     font-size: 15px;
     font-weight: 600;
     color: #ffffff;
     margin-bottom: 4px;
-    white-space: nowrap; /* Prevent wrapping */
+    white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis; /* Add ellipsis for truncation */
+    text-overflow: ellipsis;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    width: fit-content; /* Allow name to take natural width */
-}
-
-.activity {
+    width: fit-content;
+  }
+  
+  .activity {
     font-family: 'Satoshi', sans-serif;
     font-size: 12px;
-    color: #b9bbbe;
-    font-weight: 400;
-    white-space: nowrap; /* Prevent wrapping */
+    color: #b9bbbe; /* Default to gray */
+    font-weight: 400; /* Default to non-bold */
+    white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis; /* Add ellipsis for truncation */
+    text-overflow: ellipsis;
     margin-bottom: 2px;
     line-height: 1;
     display: block !important;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    max-width: none; /* Remove any max-width restriction */
-    width: fit-content; /* Allow activity to take full width needed */
-}
-
-/* Style for "currently doing nothing" message */
-.activity.nothing {
+    max-width: none;
+    width: fit-content;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: transform;
+  }
+  
+  .activity.nothing {
     font-family: 'Satoshi', sans-serif;
-    color: #72767d;
-    font-weight: 600;
+    color: #b9bbbe;
+    font-weight: 400;
     font-size: 11.3px;
     margin-top: 0;
-    white-space: nowrap; /* Prevent wrapping */
+    white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis; /* Add ellipsis for truncation */
+    text-overflow: ellipsis;
     display: block !important;
     visibility: visible !important;
-    width: fit-content; /* Allow nothing text to take natural width */
-}
-
-/* Style for activity details */
-.activity span {
+    width: fit-content;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: transform;
+  }
+  
+  .activity span {
     font-family: 'Satoshi', sans-serif;
-    font-size: 11px; /* Increased from 9px */
-    opacity: 0.8;
+    font-size: 11px;
     display: inline-block;
     vertical-align: top;
-    white-space: nowrap; /* Prevent wrapping */
-    max-width: 100%; /* Allow full width */
-}
-
-.asset {
+    white-space: nowrap;
+    max-width: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: transform;
+  }
+  
+  #activityLine1 span:first-of-type {
+    font-weight: 700;
+    color: #ffffff !important; /* Pure white for activity type */
+    opacity: 1;
+    margin-right: 4px; /* Spacing between type and name */
+  }
+  
+  #activityLine1 span:not(:first-of-type) {
+    color: #b9bbbe; /* Gray for activity name */
+    font-weight: 400;
+    opacity: 0.8;
+  }
+  
+  #activityLine2 span {
+    color: #b9bbbe; /* Gray for details in second line */
+    font-weight: 400;
+    opacity: 0.8;
+  }
+  
+  #activityLine2 i {
+    color: #b9bbbe; /* Gray for 'last seen' text */
+    font-weight: 400;
+    opacity: 0.8;
+    font-style: italic;
+  }
+  
+  .asset {
     width: 57px !important;
     height: 57px !important;
     border-radius: 10px;
@@ -416,20 +461,18 @@ body {
     right: -10px;
     top: 50%;
     transform: translateY(-50%);
-    display: block; /* Ensure asset is visible by default */
-}
-
-/* Adjust padding when asset is present */
-.discord-Profile-Container:not(.no-activity):not(.offline) .card {
-    padding-right: 70px; /* Increased from 60px to accommodate larger text */
-}
-
-/* Adjust container width when asset is present */
-.discord-Profile-Container:not(.no-activity):not(.offline) {
-    min-width: 200px; /* Minimum width when asset is present */
+    display: block;
+  }
+  
+  .discord-Profile-Container:not(.no-activity):not(.offline) .card {
+    padding-right: 70px;
+  }
+  
+  .discord-Profile-Container:not(.no-activity):not(.offline) {
+    min-width: 200px;
     width: fit-content;
-    max-width: 400px; /* Increased from 350px to accommodate larger text */
-}
+    max-width: 400px;
+  }
 
 .social-links {
     display: flex;
