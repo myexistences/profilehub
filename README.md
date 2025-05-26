@@ -1,117 +1,160 @@
 # 🌐 ProfileHub
 
-> **Your digital calling card – elegant, animated, and 100 % yours.**
+> **Your digital calling card – elegant, animated, and 100% yours.**
 
-[Live Preview »](https://profilehub-la2b.vercel.app/)   
-[![GitHub Stars](https://img.shields.io/github/stars/myexistences/profilehub?style=flat-square)](https://github.com/myexistences/profilehub/stargazers)  [![GitHub Forks](https://img.shields.io/github/forks/myexistences/profilehub?style=flat-square)](https://github.com/myexistences/profilehub/fork)
+[Live Preview »](https://profilehub-la2b.vercel.app/)   
+[![GitHub Stars](https://img.shields.io/github/stars/myexistences/profilehub?style=flat-square)](https://github.com/myexistences/profilehub/stargazers)  [![GitHub Forks](https://img.shields.io/github/forks/myexistences/profilehub?style=flat-square)](https://github.com/myexistences/profilehub/fork)
 
----
+## 📋 About
 
-## ✨ Highlights
+ProfileHub is a personal backup and showcase platform that serves as your digital identity hub. It's designed to be your central location for sharing your online presence, content, and professional information. This project is maintained by [myexistences](https://github.com/myexistences) as a personal backup and template for creating beautiful profile pages.
 
-| Visual                          | Interaction                                          |
-| ------------------------------- | ---------------------------------------------------- |
-| 🎥 Full‑screen background video | 🔊 Custom volume slider & mute toggle                |
-| ❄️ Animated snow overlays       | 🔗 One‑click social links (YouTube, GitHub, Discord) |
-| 🖼️ Avatar + animated username  | 🌍 Location badge                                    |
-| 📝 Status / quote line          | 📈 Page‑view counter (static placeholder)            |
-
-All assets are **mobile‑responsive**, lightweight, and free of external frameworks.
-
----
-
-## 🖼️ Preview
-
-![ProfileHub Screenshot](https://i.imgur.com/PcTori4.png)
-
----
-
-## 📂 Directory Layout
+## 🏗️ Project Structure
 
 ```
 profilehub/
-├── index.html         # Main page (HTML5)
-├── styles.css         # All custom styles & animations
-├── background.mp4     # Replace with your own video (≤ 20 MB for GitHub)
-├── assets/            # Optional folder for icons / images
-└── README.md          # You are here
+├── client/                 # Frontend application
+│   ├── public/            # Static assets
+│   │   ├── images/       # Image assets
+│   │   └── videos/       # Video backgrounds
+│   ├── src/              # Source code
+│   │   ├── components/   # React components
+│   │   ├── styles/       # CSS/SCSS files
+│   │   └── utils/        # Utility functions
+│   └── package.json      # Frontend dependencies
+│
+├── server/                # Backend application
+│   ├── src/              # Server source code
+│   ├── config/           # Configuration files
+│   └── package.json      # Backend dependencies
+│
+├── LICENSE               # MIT License
+└── README.md            # Project documentation
 ```
 
----
+## ✨ Key Features
 
-## 📥 Quick‑Start
+### Personal Branding
+- 🎨 Customizable themes and layouts
+- 🖼️ Professional avatar and banner support
+- 📝 Dynamic bio and status updates
+- 🌈 Color scheme customization
 
-### 1 · Clone / Download
+### Content Management
+- 📁 File hosting and sharing
+- 🔗 Social media link aggregation
+- 📊 Analytics and view tracking
+- 📱 Mobile-responsive design
 
+### Technical Features
+- ⚡ Fast and optimized performance
+- 🔒 Secure data handling
+- 🚀 Easy deployment
+- 📦 Modern tech stack
+
+## 🚀 Quick Start
+
+1. **Clone the Repository**
 ```bash
-# SSH
-git clone git@github.com:myexistences/profilehub.git
-# – or HTTPS –
-# git clone https://github.com/myexistences/profilehub.git
+git clone https://github.com/myexistences/profilehub.git
 cd profilehub
 ```
 
-> Alternatively, [download the ZIP](https://github.com/myexistences/profilehub/archive/refs/heads/main.zip) and extract.
+2. **Install Dependencies**
+```bash
+# Install frontend dependencies
+cd client
+npm install
 
-### 2 · Personalise
-
-Open **`index.html`** in your favourite editor and change:
-
-| Section                         | What to Edit                       |
-| ------------------------------- | ---------------------------------- |
-| `<img class="avatar" …>`        | Link to your avatar (PNG/GIF/WebP) |
-| `<h1 class="username">`         | Your display name                  |
-| `<h3 class="description">`      | Quote / tagline                    |
-| `<span class="location">`       | Location text                      |
-| `.social-links > a`             | Your profile URLs                  |
-| `<source src="background.mp4">` | Your own background video          |
-
-Optional: tweak colours, fonts, or animations inside **`styles.css`**.
-
-### 3 · Preview Locally
-
-Simply double‑click **`index.html`** – no build tools needed.
-
-### 4 · Deploy Publicly *(1‑click)*
-
-| Platform             | Instructions                                      |
-| -------------------- | ------------------------------------------------- |
-| **GitHub Pages**     | Settings → Pages → Branch **`main /root`** → Save |
-| **Vercel**           | `Import Project` → Framework `Other` → Deploy     |
-| **Netlify**          | `New site from Git` → pick repo → Deploy          |
-| **Cloudflare Pages** | Connect GitHub → Select repo → Deploy             |
-
-> The site is fully static – any free static host will work.
-
----
-
-## 🛡️ Copyright & Personal Store
-
-This template is provided **for personal portfolios and non‑commercial sites only**. Commercial resale, distribution in paid bundles, or inclusion in a **"template store"** is **not permitted** without written consent.
-
-Add your own copyright footer by inserting the following snippet before `</body>`:
-
-```html
-<footer class="copyright">
-  © <span id="year"></span> Your Name – All Rights Reserved
-</footer>
-<script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-</script>
+# Install backend dependencies
+cd ../server
+npm install
 ```
 
-> Remove or modify the notice only for **personal use**. If you wish to offer ProfileHub in a commercial product, please open an issue to discuss licensing.
+3. **Configure Environment**
+```bash
+# In server directory
+cp .env.example .env
+# Edit .env with your configuration
+```
+
+4. **Start Development Servers**
+```bash
+# Start backend server
+cd server
+npm run dev
+
+# Start frontend server (in a new terminal)
+cd client
+npm run dev
+```
+
+## 🎨 Customization Guide
+
+### Basic Setup
+1. Update `client/src/config/profile.js`:
+   - Personal information
+   - Social media links
+   - Theme preferences
+   - Content sections
+
+2. Add your assets:
+   - Place images in `client/public/images/`
+   - Add videos to `client/public/videos/`
+
+### Advanced Customization
+- Modify components in `client/src/components/`
+- Edit styles in `client/src/styles/`
+- Add new features in `client/src/utils/`
+
+## 📦 Deployment
+
+### Frontend Deployment
+```bash
+cd client
+npm run build
+# Deploy the build folder to your hosting service
+```
+
+### Backend Deployment
+```bash
+cd server
+npm run build
+# Deploy to your server
+```
+
+## 🔧 Environment Variables
+
+Create a `.env` file in the server directory:
+
+```env
+PORT=3000
+MONGODB_URI=your_mongodb_uri
+JWT_SECRET=your_jwt_secret
+```
+
+## 🤝 Contributing
+
+While this is primarily a personal backup, contributions are welcome:
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Open a Pull Request
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 📞 Support
+
+For support:
+- Open an issue on GitHub
+- Contact [myexistences](https://github.com/myexistences)
 
 ---
 
-## ♻️ Attribution
+Made with ❤️ by [myexistences](https://github.com/myexistences)
 
-Created and maintained by **[existence](https://github.com/myexistences)**. Feel free to fork & customise – a ★ or PR is always appreciated!
-
----
-
-## 📜 License
-
-Released under the **MIT License** for personal, open‑source projects. See [`LICENSE`](LICENSE).
-
----
+[Back to top](#-profilehub) 
