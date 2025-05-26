@@ -14,43 +14,44 @@ ProfileHub is a personal backup and showcase platform that serves as your digita
 ```
 profilehub/
 ├── client/                 # Frontend application
-│   ├── public/            # Static assets
-│   │   ├── images/       # Image assets
-│   │   └── videos/       # Video backgrounds
-│   ├── src/              # Source code
-│   │   ├── components/   # React components
-│   │   ├── styles/       # CSS/SCSS files
-│   │   └── utils/        # Utility functions
-│   └── package.json      # Frontend dependencies
+│   ├── assets/            # Static assets (images, icons)
+│   ├── index.html         # Main HTML file
+│   ├── styles.css         # Main stylesheet
+│   ├── script.js          # Main JavaScript file
+│   ├── audio.mp3          # Background audio
+│   └── background.mp4     # Background video
 │
 ├── server/                # Backend application
-│   ├── src/              # Server source code
-│   ├── config/           # Configuration files
-│   └── package.json      # Backend dependencies
+│   ├── routes/           # API routes
+│   ├── index.js          # Main server file
+│   ├── bot.js            # Bot functionality
+│   └── node_modules/     # Server dependencies
 │
 ├── LICENSE               # MIT License
-└── README.md            # Project documentation
+├── package.json         # Project dependencies
+└── README.md           # Project documentation
 ```
 
 ## ✨ Key Features
 
-### Personal Branding
-- 🎨 Customizable themes and layouts
-- 🖼️ Professional avatar and banner support
-- 📝 Dynamic bio and status updates
-- 🌈 Color scheme customization
+### Visual Elements
+- 🎥 Full-screen background video support
+- 🎵 Background audio with volume control
+- 🖼️ Customizable avatar and profile elements
+- ❄️ Animated effects and overlays
+- 📱 Fully responsive design
 
-### Content Management
-- 📁 File hosting and sharing
-- 🔗 Social media link aggregation
-- 📊 Analytics and view tracking
-- 📱 Mobile-responsive design
+### Interactive Features
+- 🔊 Audio controls (play/pause/volume)
+- 🔗 Social media link integration
+- 🎨 Theme customization
+- ⚡ Smooth animations and transitions
 
 ### Technical Features
-- ⚡ Fast and optimized performance
-- 🔒 Secure data handling
+- 🛠️ Simple and clean architecture
+- 📦 Minimal dependencies
+- 🔒 Secure and privacy-focused
 - 🚀 Easy deployment
-- 📦 Modern tech stack
 
 ## 🚀 Quick Start
 
@@ -62,76 +63,62 @@ cd profilehub
 
 2. **Install Dependencies**
 ```bash
-# Install frontend dependencies
-cd client
-npm install
-
-# Install backend dependencies
-cd ../server
 npm install
 ```
 
-3. **Configure Environment**
+3. **Start the Development Server**
 ```bash
-# In server directory
-cp .env.example .env
-# Edit .env with your configuration
-```
-
-4. **Start Development Servers**
-```bash
-# Start backend server
+# Start the server
 cd server
-npm run dev
+node index.js
 
-# Start frontend server (in a new terminal)
-cd client
-npm run dev
+# The client files can be served using any static file server
 ```
 
 ## 🎨 Customization Guide
 
 ### Basic Setup
-1. Update `client/src/config/profile.js`:
-   - Personal information
-   - Social media links
-   - Theme preferences
-   - Content sections
+1. Edit `client/index.html`:
+   - Update personal information
+   - Modify social media links
+   - Change profile content
 
-2. Add your assets:
-   - Place images in `client/public/images/`
-   - Add videos to `client/public/videos/`
+2. Customize `client/styles.css`:
+   - Modify colors and themes
+   - Adjust layout and spacing
+   - Customize animations
+
+3. Replace Media Files:
+   - Replace `background.mp4` with your video
+   - Replace `audio.mp3` with your audio
+   - Update images in `assets/` directory
 
 ### Advanced Customization
-- Modify components in `client/src/components/`
-- Edit styles in `client/src/styles/`
-- Add new features in `client/src/utils/`
+- Modify `client/script.js` for custom functionality
+- Add new features to the server in `server/index.js`
+- Extend bot functionality in `server/bot.js`
 
 ## 📦 Deployment
 
-### Frontend Deployment
-```bash
-cd client
-npm run build
-# Deploy the build folder to your hosting service
-```
+### Static Files Deployment
+1. Upload the `client/` directory contents to your hosting service
+2. Ensure all media files are properly uploaded
+3. Configure your domain to point to the hosting service
 
-### Backend Deployment
-```bash
-cd server
-npm run build
-# Deploy to your server
-```
+### Server Deployment
+1. Deploy the `server/` directory to your hosting service
+2. Set up environment variables if needed
+3. Start the server using `node index.js`
 
-## 🔧 Environment Variables
+## 🔧 Configuration
 
-Create a `.env` file in the server directory:
+The project uses minimal configuration. Key files to modify:
 
-```env
-PORT=3000
-MONGODB_URI=your_mongodb_uri
-JWT_SECRET=your_jwt_secret
-```
+- `client/index.html` - Main content and structure
+- `client/styles.css` - Visual styling and animations
+- `client/script.js` - Interactive features
+- `server/index.js` - Server configuration
+- `server/bot.js` - Bot functionality
 
 ## 🤝 Contributing
 
