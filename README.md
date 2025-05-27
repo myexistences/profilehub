@@ -1,6 +1,6 @@
 # 🌐 ProfileHub
 
-> **Your digital calling card – elegant, animated, and 100% yours.**
+> **Your digital calling card – elegant, animated, and 100% yours.** 
 
 [Live Preview »](https://profilehub-la2b.vercel.app/)   
 [![GitHub Stars](https://img.shields.io/github/stars/myexistences/profilehub?style=flat-square)](https://github.com/myexistences/profilehub/stargazers)  [![GitHub Forks](https://img.shields.io/github/forks/myexistences/profilehub?style=flat-square)](https://github.com/myexistences/profilehub/fork)
