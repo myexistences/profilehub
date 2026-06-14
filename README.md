@@ -3,7 +3,7 @@
 > **Your digital calling card – elegant, animated, and 100 % yours.**
 
 [Live Preview »](https://profilehub-la2b.vercel.app/)   
-[![GitHub Stars](https://img.shields.io/github/stars/myexistences/profilehub?style=flat-square)](https://github.com/myexistences/profilehub/stargazers)  [![GitHub Forks](https://img.shields.io/github/forks/myexistences/profilehub?style=flat-square)](https://github.com/myexistences/profilehub/fork)
+[![GitHub Stars](https://img.shields.io/github/stars/rabbanyhmm/profilehub?style=flat-square)](https://github.com/rabbanyhmm/profilehub/stargazers)  [![GitHub Forks](https://img.shields.io/github/forks/rabbanyhmm/profilehub?style=flat-square)](https://github.com/rabbanyhmm/profilehub/fork)
 
 ---
 
@@ -45,13 +45,13 @@ profilehub/
 
 ```bash
 # SSH
-git clone git@github.com:myexistences/profilehub.git
+git clone git@github.com:rabbanyhmm/profilehub.git
 # – or HTTPS –
-# git clone https://github.com/myexistences/profilehub.git
+# git clone https://github.com/rabbanyhmm/profilehub.git
 cd profilehub
 ```
 
-> Alternatively, [download the ZIP](https://github.com/myexistences/profilehub/archive/refs/heads/main.zip) and extract.
+> Alternatively, [download the ZIP](https://github.com/rabbanyhmm/profilehub/archive/refs/heads/main.zip) and extract.
 
 ### 2 · Personalise
 
@@ -106,7 +106,7 @@ Add your own copyright footer by inserting the following snippet before `</body>
 
 ## ♻️ Attribution
 
-Created and maintained by **[existence](https://github.com/myexistences)**. Feel free to fork & customise – a ★ or PR is always appreciated!
+Created and maintained by **[existence](https://github.com/rabbanyhmm)**. Feel free to fork & customise – a ★ or PR is always appreciated!
 
 ---
 
